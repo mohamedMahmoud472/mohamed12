@@ -1,0 +1,94 @@
+ -0,0 +1,93 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+template<class t1>
+class stack {
+
+private:
+	struct node {
+		t1 date;
+		node* next;
+	};
+	node* top;
+	node* del;
+	node* head;
+public:
+	stack() {
+		top = NULL;
+	}
+	bool isempty() {
+		return top == NULL;
+	}
+
+	void push(t1 val) {
+		node* newnode = new node();
+		newnode->date = val;
+		newnode->next = top;
+		top = newnode;
+		head = top;
+	}
+	void pop() {
+
+		if (top == NULL)
+
+			return;
+
+		del = top;
+
+		top = top->next;
+
+		del = NULL;
+
+		free(del);
+
+	}
+
+	void show() {
+		while (top != NULL) {
+			cout << top->date << endl;
+			pop();
+		}
+
+	}
+
+	void findmin() {
+		if (isempty())
+			cout << "Stack is Empty/n";
+		else {
+			int x = head->date;
+			while (head != NULL) {
+				if (x > head->date) {
+					x = head->date;
+
+				}
+
+				head = head->next;
+			}
+			top = top->next;
+			cout << x<<endl;
+		}
+	}
+
+};
+
+int main()
+
+{
+
+	stack<int> s;
+
+	s.push(1);
+
+	s.push(2);
+
+	s.push(3);
+
+	s.push(-1);
+
+	s.findmin();
+
+	s.show();
+
+}
